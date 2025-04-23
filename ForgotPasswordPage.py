@@ -6,7 +6,7 @@ class ForgotPasswordPage:
     def __init__(self, driver):
         self.driver = driver
         self.username_input = (By.NAME, "username")
-        self.reset_button = (By.XPATH, "//button[@type='submit']")#//p[@class='oxd-text oxd-text--p orangehrm-login-forgot-header']
+        self.reset_button = (By.XPATH, "//button[@type='submit']")
 
     def enter_username(self, username):
         WebDriverWait(self.driver, 10).until(

@@ -1,14 +1,23 @@
-import unittest
+import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from LoginPage import LoginPage
 from AdminPage import AdminPage
 
-class TestAdminPage(unittest.TestCase):
-    def setUp(self):
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-        self.driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+@pytest.fixture
+def driver_setup():
+    url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver.get(url)
+    yield driver
+    driver.quit()
+
+class TestAdminPage:
+    def setup(self,driver_setup):
+        self.driver = driver_setup
+        #self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        #self.driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
         self.driver.maximize_window()
 
         # Login as Admin

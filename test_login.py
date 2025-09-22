@@ -1,12 +1,12 @@
-import unittest
+import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from LoginPage import LoginPage
 from ForgotPasswordPage import ForgotPasswordPage
 
-class TestLogin(unittest.TestCase):
-    def setUp(self):
+class TestLogin:
+    def setup(self):
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         self.driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
 
@@ -25,10 +25,8 @@ class TestLogin(unittest.TestCase):
 
         # Step 4: Verify Success Message
         success_message = forgot_password_page.get_success_message()
-        self.assertIn("Reset Password link sent successfully", success_message)
+        assert "Reset Password link sent successfully", success_message
 
-    def tearDown(self):
+    def teardown(self):
         self.driver.quit()
 
-if __name__ == "__main__":
-    unittest.main()

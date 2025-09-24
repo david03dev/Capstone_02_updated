@@ -3,8 +3,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class AdminPage:
-    def __init__(self, driver):
-        self.driver = driver
+    def __init__(self):
+        #self.driver = driver
         self.page_title = "OrangeHRM"
         self.user_management = (By.XPATH, "//span[contains(text(), 'User Management')]")
         self.job = (By.XPATH, "//li[span[contains(@class, 'oxd-topbar-body-nav-tab-item') and contains(text(), 'Job')]]") 
@@ -23,13 +23,7 @@ class AdminPage:
         self.my_info = (By.XPATH, "//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name' and text()='My Info']") 
         self.Performance = (By.XPATH, "//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name' and text()='Performance']")
 
+        #Main menu list
 
-    def validate_admin_options(self):
-        options = [
-            self.user_management, self.job, self.organization, self.Qualifications, self.Nationalities, self.Corporate, self.Configuration,self.Admin, self.PIM, self.Leave, self.Time, self.Recruitment, self.my_info, self.Performance
-        ]
-        for option in options:
-            WebDriverWait(self.driver, 10).until(
-                EC.visibility_of_element_located(option)
-            )
+
  

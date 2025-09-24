@@ -2,6 +2,8 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from LoginPage import LoginPage
 from AdminPage import AdminPage
 
@@ -29,9 +31,18 @@ class TestAdminPage:
         login_page.click_admin_page()
 
         # Step 1: Validate Title
-        admin_page = AdminPage(driver)
+        admin_page = AdminPage()
         #admin_page.validate_title()
         assert driver.title == admin_page.page_title
 
         # Step 2: Validate Admin Options
-        #admin_page.validate_admin_options()
+
+        options = [
+            admin_page.user_management, admin_page.job, admin_page.organization, admin_page.Qualifications,
+            admin_page.Nationalities,admin_page.Corporate, admin_page.Configuration, admin_page.Admin, admin_page.PIM,
+            admin_page.Leave, admin_page.Time, admin_page.Recruitment,admin_page.my_info, admin_page.Performance
+        ]
+        for option in options:
+            WebDriverWait(driver, 10).until(
+                EC.visibility_of_element_located(option)
+            )

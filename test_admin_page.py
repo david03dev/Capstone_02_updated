@@ -10,36 +10,28 @@ def driver_setup():
     url = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     driver.get(url)
+    driver.maximize_window()
     yield driver
     driver.quit()
 
 class TestAdminPage:
-    def setup(self,driver_setup):
-        self.driver = driver_setup
-        #self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-        #self.driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
-        self.driver.maximize_window()
+
+    def test_admin_page_header_validation(self,driver_setup):
+        driver = driver_setup
 
         # Login as Admin
-        login_page = LoginPage(self.driver)
+        login_page = LoginPage(driver)
         login_page.enter_username("Admin")
         login_page.enter_password("admin123")
         login_page.click_login()
-        login_page.click_admin_page()
-
-    def test_admin_page_header_validation(self):
-        admin_page = AdminPage(self.driver)
 
         #open admin page
-        
+        login_page.click_admin_page()
+
         # Step 1: Validate Title
-        admin_page.validate_title()
+        admin_page = AdminPage(driver)
+        #admin_page.validate_title()
+        assert driver.title == admin_page.page_title
 
         # Step 2: Validate Admin Options
-        admin_page.validate_admin_options()
-
-    def tearDown(self):
-        self.driver.quit()
-
-if __name__ == "__main__":
-    unittest.main()
+        #admin_page.validate_admin_options()

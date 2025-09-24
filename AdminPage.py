@@ -23,10 +23,6 @@ class AdminPage:
         self.my_info = (By.XPATH, "//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name' and text()='My Info']") 
         self.Performance = (By.XPATH, "//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name' and text()='Performance']")
 
-        
-        
-    def validate_title(self):
-        assert self.driver.title == self.page_title
 
     def validate_admin_options(self):
         options = [

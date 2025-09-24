@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class LoginPage:
-    def __init__(self, driver):
+    def __init__(self,driver):
         self.driver = driver
         self.username_input = (By.NAME, "username")
         self.password_input = (By.NAME, "password")

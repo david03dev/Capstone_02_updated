@@ -36,13 +36,21 @@ class TestAdminPage:
         assert driver.title == admin_page.page_title
 
         # Step 2: Validate Admin Options
-
-        options = [
-            admin_page.user_management, admin_page.job, admin_page.organization, admin_page.Qualifications,
-            admin_page.Nationalities,admin_page.Corporate, admin_page.Configuration, admin_page.Admin, admin_page.PIM,
-            admin_page.Leave, admin_page.Time, admin_page.Recruitment,admin_page.my_info, admin_page.Performance
+        all_options = [
+            admin_page.user_management, admin_page.job, admin_page.organization, admin_page.qualifications,
+            admin_page.nationalities, admin_page.corporate, admin_page.configuration
         ]
-        for option in options:
+        for option in all_options:
             WebDriverWait(driver, 10).until(
                 EC.visibility_of_element_located(option)
+            )
+
+        # Step 3: Validate All menu in admin page
+        all_menu = [
+            admin_page.PIM, admin_page.Leave, admin_page.Time, admin_page.Recruitment,admin_page.my_info, admin_page.Performance,
+            admin_page.Dashboard, admin_page.Directory, admin_page.Maintenance, admin_page.Buzz
+        ]
+        for menu in all_menu:
+            WebDriverWait(driver, 10).until(
+                EC.visibility_of_element_located(menu)
             )

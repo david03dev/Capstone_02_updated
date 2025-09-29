@@ -45,9 +45,17 @@ class TestAdminPage:
                 EC.visibility_of_element_located(option)
             )
 
-        def test_options_validation(self, driver_setup)
+        def test_options_validation(self, driver_setup):
             driver = driver_setup
-        # Step 3: Validate All menu in admin page
+            # Login as Admin
+            login_page = LoginPage(driver)
+            login_page.enter_username("Admin")
+            login_page.enter_password("admin123")
+            login_page.click_login()
+
+            # open admin page
+            login_page.click_admin_page()
+            # Step 3: Validate All menu in admin page
             all_menu = [
                 admin_page.PIM, admin_page.Leave, admin_page.Time, admin_page.Recruitment,admin_page.my_info, admin_page.Performance,
                 admin_page.Dashboard, admin_page.Directory, admin_page.Maintenance, admin_page.Buzz

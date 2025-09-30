@@ -55,6 +55,7 @@ class TestAdminPage:
 
         # open admin page
         login_page.click_admin_page()
+        admin_page = AdminPage()
         # Step 3: Validate All menu in admin page
         all_menu = [
             admin_page.PIM, admin_page.Leave, admin_page.Time, admin_page.Recruitment,admin_page.my_info, admin_page.Performance,
